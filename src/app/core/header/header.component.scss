@@ -1,0 +1,31 @@
+@import "../../../assets/sass/_vars.scss";
+
+.main-header {
+  width: 100%;
+  height: auto;
+  padding: 30px 39px;
+  @include flex(row, center, space-between, 0);
+  background: rgb(18,34,104);
+  background: linear-gradient(90deg, var(--blue) 0%, var(--darkpurple) 100%);
+
+  .main-header__logo {
+    .main-header__logo-image {
+      height: 31px;
+      @media(max-width:768px) {
+        height: 22px;
+
+      }
+    }
+  }
+
+  .main-header__navigation {
+    .main-header__list {
+      @include flex(row, center, flex-end, 40px);
+      .main-header__item {
+        .main-header__item-link {
+          @include font(#fff, 15px, 17px, 300, center);
+        }
+      }
+    }
+  }
+}

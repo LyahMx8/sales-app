@@ -1,0 +1,86 @@
+@import "../../../assets/sass/_vars.scss";
+
+.total-sales {
+  background-color: #fff;
+  border-radius: 13px;
+  max-width: 319px;
+  @media (max-width: 640px) {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .total-sales__title {
+    width: 100%;
+    position: relative;
+    padding: 21px 18px;
+    background: rgb(18,34,104);
+    background: linear-gradient(90deg, var(--darkpurple) 0%, var(--purple) 100%);
+    border-radius: 13px 13px 0 0;
+    @include flex(row, center, center, 21px);
+
+    .total-sales__title-caption {
+      @include font(#fff, 15px, 17px, 500, center);
+    }
+
+    .total-sales__title-info {
+      cursor: help;
+      .total-sales__title-caption {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        transition: .4s opacity ease;
+        overflow: hidden;
+        width: 0;
+        height: auto;
+      }
+      &:hover {
+        .total-sales__title-caption {
+          padding: 5px;
+          width: 165px;
+          background-color: var(--darkpurple);
+          @include keyframes(fade){
+            0%{
+            opacity: 0;
+            }
+           6%, 94%{
+            opacity: 1;
+            }
+           100%{
+            opacity: 0;
+           }
+          }
+          @include animate(fade, 6s, linear, 1);
+          @include font(#fff, 10px, 11px, 300, center);
+          @media (max-width: 640px) {
+            position: absolute;
+            left: 0;
+            top: 50px;
+            width: 100%;
+          }
+        }
+      }
+      .total-sales__title-info-image {
+        width: 17px;
+        height: 17px;
+      }
+    }
+  }
+
+  .total-sales__amount {
+    padding: 20px 79px;
+
+    .total-sales__amount-price {
+      @include font(var(--purple), 28px, 30px, 700, center);
+      background: -webkit-linear-gradient(174deg, var(--darkpurple), var(--purple));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .total-sales__amount-date {
+      margin-top: 10px;
+      @include font(var(--lightblue), 13px, 15px, 300, center);
+    }
+  }
+
+}

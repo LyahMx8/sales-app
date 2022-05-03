@@ -1,0 +1,15 @@
+@import "../../../assets/sass/_vars.scss";
+
+.business-board {
+  margin: 36px 39px;
+  .sales-filters {
+    @include flex(row, flex-start, center, 23px);
+    @media (max-width: 640px) {
+      @include flex(column, center, center, 23px);
+    }
+    app-total-sales,
+    app-filter-sales {
+      width: 100%;
+    }
+  }
+}

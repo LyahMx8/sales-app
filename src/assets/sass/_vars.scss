@@ -1,0 +1,43 @@
+/* Card */
+@mixin card($width: false, $height: false, $display: false) {
+  @if $width { max-width: $width; }
+  @if $height { height: $height; }
+  @if $display { display: $display; }
+  background: #fff;
+  box-shadow: 0px 8px 16px rgba(110, 120, 130, 0.12);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  @media (max-width: 640px) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+/* Element position */
+@mixin flex($direction, $verticalAlign, $horizontalAlign, $elementsSpace) {
+	display: flex;
+	flex-direction: $direction;
+	align-items: $verticalAlign;
+	justify-content: $horizontalAlign;
+  gap: $elementsSpace;
+}
+
+/* Font */
+@mixin font($color: false, $size: false, $lineHeight: false, $weight: false, $align: false) {
+  @if $size { font-size: $size; }
+  @if $color { color: $color; }
+  @if $weight { font-weight: $weight; }
+  @if $lineHeight { line-height: $lineHeight; }
+  @if $align { text-align: $align; }
+}
+
+// Animations
+@mixin animate($animation,$duration,$method,$times){
+  animation: $animation $duration $method $times;
+}
+@mixin keyframes($name){
+  @keyframes #{$name}{
+    @content;
+  }
+}

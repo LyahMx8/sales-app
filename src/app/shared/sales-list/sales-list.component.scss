@@ -1,0 +1,121 @@
+@import "../../../assets/sass/_vars.scss";
+
+.sales-list {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 15px;
+  margin-top: 12px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+  @media (max-width: 640px) {
+    background-color: transparent;
+    margin-top: 28px;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 62px;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+    @media (max-width: 640px) {
+      content: none;
+    }
+  }
+
+  &__title {
+    padding: 12px 20px;
+    border-radius: 15px 15px 0 0;
+    background: linear-gradient(90deg, var(--blue) 0%, var(--darkpurple) 100%);
+    @include font(#fff, 15px, 17px, 300, left);
+    @media (max-width: 640px) {
+      border-radius: 15px;
+    }
+  }
+
+  &__header {
+    @media (max-width: 640px) {
+      display: none;
+    }
+    &--row {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 1px solid var(--lightgrey);
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(5, 1fr);
+      &-title {
+        padding: 16px 20px;
+        @include font(var(--black), 13px, 15px, 400, left);
+      }
+    }
+  }
+
+  &__body {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-bottom: 30px;
+    &--row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(5, 1fr);
+      border-left: 5px solid var(--blue);
+      border-bottom: 1px solid var(--lightgrey);
+      @media (max-width: 640px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        border: none;
+        margin: 10px 0;
+        padding: 20px 25px;
+        border-radius: 12px;
+        background-color: #fff;
+        box-shadow: 7px 3px 7px rgb(0 0 0 / 4%);
+      }
+      &:nth-child(2n) {
+        border-left: 5px solid var(--darkgrey);
+        @media (max-width: 640px) {
+          border: none;
+        }
+      }
+      &:hover {
+        background-color: var(--lightgrey);
+      }
+      &-text {
+        padding: 18px 20px;
+        @include font(var(--darkgrey), 13px, 15px, 400, left);
+        @media (max-width: 640px) {
+          padding: 0;
+        }
+        &:first-child,
+        &:last-child {
+          color: var(--blue);
+        }
+        &-discounts {
+          @media (max-width: 640px) {
+            @include flex(row, center, flex-start, 10px);
+          }
+          &-price {
+            color: var(--blue);
+          }
+          &-concept {
+            color: var(--darkgrey);
+            margin: 10px 0;
+          }
+          &-amount {
+            color: var(--red);
+          }
+        }
+      }
+      &-icon {
+        @include flex(row, center, flex-start, 5px);
+        img {
+          max-width: 21px;
+          max-height: 17px;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}

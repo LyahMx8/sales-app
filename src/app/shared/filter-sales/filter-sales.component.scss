@@ -1,0 +1,124 @@
+@import "../../../assets/sass/_vars.scss";
+
+.filter-sales {
+  width: 100%;
+
+  .filter-actions {
+    @include flex(row, center, center, 0);
+    background-color: #fff;
+
+    .filter-actions__item {
+      width: 100%;
+      padding: 4px 5px;
+      .filter-actions__item-button {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        @include font(var(--blue), 13px, 15px, 400, center);
+        transition: .2s all ease;
+        &:hover {
+          border-radius: 15px;
+          background-color: var(--lightgrey);
+          box-shadow: 2px 2px 5px var(--lightgrey);
+        }
+        &.active {
+          border-radius: 15px;
+          background-color: var(--grey);
+          @include font(var(--blue), 13px, 15px, 500, center);
+        }
+      }
+    }
+  }
+
+  .filter-modal {
+    margin-top: 14px;
+    float: right;
+    position: relative;
+    z-index: 3;
+    @media(max-width:768px) {
+      width: 100%;
+    }
+    .filter-toggler {
+      width: 189px;
+      @include flex(row, center, center, 10px);
+      padding: 10px;
+      border-radius: 11px;
+      background-color: #fff;
+      @media(max-width:768px) {
+        width: 100%;
+      }
+      @include font(var(--blue), 14px, 16px, 300, center);
+      .filter-toggler__image {
+        width: 19px;
+        height: 19px;
+      }
+    }
+
+    .filter-form {
+      position: absolute;
+      width: 300px;
+      top: 0;
+      right: 0;
+      padding: 15px 20px;
+      border-radius: 12px;
+      background-color: #fff;
+      box-shadow: 7px 3px 7px rgb(0 0 0 / 4%);
+      @media(max-width:768px) {
+        width: 100%;
+      }
+      .filter-form__title {
+        text-align: center;
+        margin-bottom: 34px;
+        .filter-form__title-title {
+          @include font(var(--blue), 13px, 15px, 300, center);
+        }
+        .filter-form__title-icon {
+          position: absolute;
+          right: 20px;
+          top: 13px;
+          .filter-form__title-icon-image {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+    }
+
+    .filter-form__inputs {
+      @include flex(column, flex-start, center, 15px);
+      .filter-form__label {
+        cursor: pointer;
+        @include flex(row, center, center, 16px);
+        @include font(var(--blue), 17px, 19px, 400, center);
+        .filter-form__radio {
+          display: none;
+          &:checked ~ .fake-input {
+            background-color: var(--blue)
+          }
+        }
+        .fake-input {
+          width: 19px;
+          height: 19px;
+          display: inline-block;
+          border-radius: 3px;
+          border: 1px solid var(--grey);
+          &::before {
+            content: url(../../../assets/images/icons/icon-check.svg);
+
+          }
+        }
+      }
+    }
+
+    .filter-form__submit {
+      width: 178px;
+      display: block;
+      padding: 15px;
+      margin: 28px auto 0;
+      opacity: .6;
+      background-color: var(--red);
+      border-radius: 23px;
+      @include font(#fff, 17px, 19px, 700, center);
+    }
+  }
+}

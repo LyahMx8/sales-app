@@ -1,0 +1,49 @@
+<section class="filter-sales">
+  <ul class="filter-actions">
+    <li class="filter-actions__item">
+      <button class="filter-actions__item-button">Hoy</button>
+    </li>
+    <li class="filter-actions__item">
+      <button class="filter-actions__item-button">Esta semana</button>
+    </li>
+    <li class="filter-actions__item">
+      <button class="filter-actions__item-button active">Septiembre</button>
+    </li>
+  </ul>
+
+  <section class="filter-modal">
+    <button class="filter-toggler" (click)="filterForm = !filterForm">
+      Filtrar
+      <img class="filter-toggler__image" src="assets/images/icons/config.svg" alt="Filtrar items">
+    </button>
+
+    <form class="filter-form" *ngIf="filterForm">
+      <div class="filter-form__title">
+        <span class="filter-form__title-title">FILTRAR</span>
+        <button class="filter-form__title-icon" (click)="filterForm = !filterForm">
+          <img class="filter-form__title-icon-image" src="assets/images/icons/close.svg" alt="Cerrar modal">
+        </button>
+      </div>
+
+      <div class="filter-form__inputs">
+        <label class="filter-form__label">
+          <input class="filter-form__radio" name="sale-filter" type="radio">
+          <span class="fake-input"></span>
+          Cobro con datáfono
+        </label>
+        <label class="filter-form__label">
+          <input class="filter-form__radio" name="sale-filter" type="radio">
+          <span class="fake-input"></span>
+          Cobros con link de pago
+        </label>
+        <label class="filter-form__label">
+          <input class="filter-form__radio" name="sale-filter" type="radio">
+          <span class="fake-input"></span>
+          Ver todos
+        </label>
+      </div>
+
+      <button class="filter-form__submit">Aplicar</button>
+    </form>
+  </section>
+</section>

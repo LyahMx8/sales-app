@@ -30,14 +30,13 @@ import { SalesService } from '@core/_services/sales.service';
 
 
 export class FilterSalesComponent implements OnInit {
-  @Output() salesEvent = new EventEmitter<any>();
+  @Output() salesEvent = new EventEmitter<string>();
   @Output() dateEvent = new EventEmitter<Date>();
   @Output() filteredDate = new EventEmitter<string>();
 
   public openModal: boolean = false
   public activeFilter: string = 'month'
   public currentDate = new Date('2020-09-10T07:12:43')
-  public transactions: any
 
   filtersForm = new FormGroup({
     saleFilter: new FormControl('', Validators.required)
@@ -55,36 +54,35 @@ export class FilterSalesComponent implements OnInit {
 
   getSales(filter: string, criteria: any) {
     this.salesService.salesData()
-      .subscribe(data => {
-        this.transactions = data
-        this.transactions.map((transactions:any) => {
+      .pipe(
+        map((data:any) => {
           switch(filter) {
-            case 'selector':
+            case 'date':
               switch(criteria) {
                 case 'day':
-                  return transactions.filter((sale:any) => new Date(sale.date).getDay() == this.currentDate.getDay())
+                  return data.filter((sale:any) => new Date(sale.date).getDay() == this.currentDate.getDay())
                   break;
                 case 'week':
-                  return transactions.filter((sale:any) => this.getWeek(new Date(sale.date)) == this.getWeek(this.currentDate))
+                  return data.filter((sale:any) => this.getWeek(new Date(sale.date)) == this.getWeek(this.currentDate))
                   break;
                 case 'month':
-                  return transactions.filter((sale:any) => new Date(sale.date).getMonth() == this.currentDate.getMonth())
+                  return data.filter((sale:any) => new Date(sale.date).getMonth() == this.currentDate.getMonth())
                   break;
               }
               break;
-            case 'filter':
+            case 'type':
               if(criteria.saleFilter == 'all') {
-                return transactions
+                return data
               } else {
-                return transactions.filter((sale:any) => sale.paymentMethod == criteria.saleFilter)
+                return data.filter((sale:any) => sale.paymentMethod == criteria.saleFilter)
               }
               break;
             default:
-              return transactions
+              return data
           }
         })
-        this.salesEvent.emit(this.transactions)
-      })
+      )
+      .subscribe(data => this.salesEvent.emit(data))
   }
 
   getWeek(date:any) {
@@ -95,14 +93,13 @@ export class FilterSalesComponent implements OnInit {
 
   filterByDate(date:string) {
     this.activeFilter = date
-    this.getSales('selector', date)
-    this.filteredDate.emit(date)
+    this.getSales('date', date)
   }
 
   filterByType() {
     this.openModal = false
     this.filtersForm.value
-    this.getSales('filter', this.filtersForm.value)
+    this.getSales('type', this.filtersForm.value)
   }
 
 }

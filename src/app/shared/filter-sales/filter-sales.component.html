@@ -1,49 +1,49 @@
 <section class="filter-sales">
-  <ul class="filter-actions">
-    <li class="filter-actions__item">
-      <button class="filter-actions__item-button">Hoy</button>
+  <ul class="filter-sales__actions">
+    <li class="filter-sales__actions-item" (click)="filterByDate('day')">
+      <button class="filter-sales__actions-item-button" [ngClass]="(activeFilter == 'day') ? 'active' : ''">Hoy</button>
     </li>
-    <li class="filter-actions__item">
-      <button class="filter-actions__item-button">Esta semana</button>
+    <li class="filter-sales__actions-item" (click)="filterByDate('week')">
+      <button class="filter-sales__actions-item-button" [ngClass]="(activeFilter == 'week') ? 'active' : ''">Esta semana</button>
     </li>
-    <li class="filter-actions__item">
-      <button class="filter-actions__item-button active">Septiembre</button>
+    <li class="filter-sales__actions-item" (click)="filterByDate('month')">
+      <button class="filter-sales__actions-item-button" [ngClass]="(activeFilter == 'month') ? 'active' : ''">Septiembre</button>
     </li>
   </ul>
 
-  <section class="filter-modal">
-    <button class="filter-toggler" (click)="filterForm = !filterForm">
+  <section class="filter-sales__modal">
+    <button class="filter-sales__modal-toggler" type="button" (click)="openModal = !openModal">
       Filtrar
-      <img class="filter-toggler__image" src="assets/images/icons/config.svg" alt="Filtrar items">
+      <img class="filter-sales__modal-toggler-image" src="assets/images/icons/config.svg" alt="Filtrar items">
     </button>
 
-    <form class="filter-form" *ngIf="filterForm">
-      <div class="filter-form__title">
-        <span class="filter-form__title-title">FILTRAR</span>
-        <button class="filter-form__title-icon" (click)="filterForm = !filterForm">
-          <img class="filter-form__title-icon-image" src="assets/images/icons/close.svg" alt="Cerrar modal">
+    <form class="filter-sales__modal-form" [formGroup]="filtersForm" (ngSubmit)="filterByType()" [@openClose]="openModal ? true : false">
+      <div class="filter-sales__modal-form-header">
+        <span class="filter-sales__modal-form-header-title">FILTRAR</span>
+        <button class="filter-sales__modal-form-header-icon" type="button" (click)="openModal = !openModal">
+          <img class="filter-sales__modal-form-header-icon-image" src="assets/images/icons/close.svg" alt="Cerrar modal">
         </button>
       </div>
 
-      <div class="filter-form__inputs">
-        <label class="filter-form__label">
-          <input class="filter-form__radio" name="sale-filter" type="radio">
+      <div class="filter-sales__modal-form-fields">
+        <label class="filter-sales__modal-form-fields-label">
+          <input class="hidden-input" name="saleFilter" formControlName="saleFilter" value="datafono" type="radio">
           <span class="fake-input"></span>
-          Cobro con datáfono
+          Cobros con datáfono
         </label>
-        <label class="filter-form__label">
-          <input class="filter-form__radio" name="sale-filter" type="radio">
+        <label class="filter-sales__modal-form-fields-label">
+          <input class="hidden-input" name="saleFilter" formControlName="saleFilter" value="link" type="radio">
           <span class="fake-input"></span>
           Cobros con link de pago
         </label>
-        <label class="filter-form__label">
-          <input class="filter-form__radio" name="sale-filter" type="radio">
+        <label class="filter-sales__modal-form-fields-label">
+          <input class="hidden-input" name="saleFilter" formControlName="saleFilter" value="all" type="radio">
           <span class="fake-input"></span>
           Ver todos
         </label>
       </div>
 
-      <button class="filter-form__submit">Aplicar</button>
+      <button class="filter-sales__modal-form-submit" [disabled]="!filtersForm.valid">Aplicar</button>
     </form>
   </section>
 </section>

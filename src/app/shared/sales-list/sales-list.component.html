@@ -1,5 +1,5 @@
 <article class="sales-list">
-  <h1 class="sales-list__title">Tus ventas de </h1>
+  <h1 class="sales-list__title">Tus ventas de {{filter}}</h1>
 
   <header class="sales-list__header">
     <ul class="sales-list__header--row">
@@ -12,113 +12,29 @@
   </header>
 
   <section class="sales-list__body">
-    <ul class="sales-list__body--row">
+    <ul class="sales-list__body--row" *ngFor="let sale of sales; let i = index; trackBy: trackByItems">
       <li class="sales-list__body--row-text">
         <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/datafono.svg" alt="método de pago">
-          skdjaskd
+          <img src="assets/images/icons/{{sale.paymentMethod}}.svg" alt="método de pago {{sale.paymentMethod}}">
+          {{sale.collectionState}}
         </span>
       </li>
-      <li class="sales-list__body--row-text">dsfdf</li>
+      <li class="sales-list__body--row-text">{{sale.date | date : 'M/d/y - h:mm:ss'}}</li>
       <li class="sales-list__body--row-text">
         <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/visa.svg" alt="método de pago">
-          sdfdsf
+          <img src="assets/images/icons/{{sale.franchise}}.svg" alt="método de pago">
+          **** **** **** {{sale.method}}
         </span>
       </li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-    </ul>
-    <ul class="sales-list__body--row">
+      <li class="sales-list__body--row-text">{{sale.transactionID}}</li>
       <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/datafono.svg" alt="método de pago">
-          skdjaskd
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">dsfdf</li>
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/visa.svg" alt="método de pago">
-          sdfdsf
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-      <li class="sales-list__body--row-text">
-        <ul class="sales-list__body--row-text-discounts">
-          <li class="sales-list__body--row-text-discounts-price">56465</li>
-          <li class="sales-list__body--row-text-discounts-concept">dsddda</li>
-          <li class="sales-list__body--row-text-discounts-amount">-15151</li>
+        <ul class="sales-list__body--row-text-discounts" *ngIf="sale.hasDeduction; else noDeduction">
+          <li class="sales-list__body--row-text-discounts-price">{{sale.amount | currency: 'COP': '$': '4.0-2': 'es-CO'}}</li>
+          <li class="sales-list__body--row-text-discounts-concept">{{sale.deductionConcept}}</li>
+          <li class="sales-list__body--row-text-discounts-amount">-{{sale.deductionAmount | currency: 'COP': '$': '4.0-2': 'es-CO'}}</li>
         </ul>
+        <ng-template #noDeduction>{{sale.amount | currency: 'COP': '$': '4.0-2': 'es-CO'}}</ng-template>
       </li>
-    </ul>
-    <ul class="sales-list__body--row">
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/datafono.svg" alt="método de pago">
-          skdjaskd
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">dsfdf</li>
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/visa.svg" alt="método de pago">
-          sdfdsf
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-    </ul>
-    <ul class="sales-list__body--row">
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/datafono.svg" alt="método de pago">
-          skdjaskd
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">dsfdf</li>
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/visa.svg" alt="método de pago">
-          sdfdsf
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-    </ul>
-    <ul class="sales-list__body--row">
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/datafono.svg" alt="método de pago">
-          skdjaskd
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">dsfdf</li>
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/visa.svg" alt="método de pago">
-          sdfdsf
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-    </ul>
-    <ul class="sales-list__body--row">
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/datafono.svg" alt="método de pago">
-          skdjaskd
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">dsfdf</li>
-      <li class="sales-list__body--row-text">
-        <span class="sales-list__body--row-icon">
-          <img src="assets/images/icons/visa.svg" alt="método de pago">
-          sdfdsf
-        </span>
-      </li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
-      <li class="sales-list__body--row-text">sdfdsf</li>
     </ul>
   </section>
 </article>

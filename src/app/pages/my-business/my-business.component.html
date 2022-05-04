@@ -1,10 +1,10 @@
 <main class="business-board">
   <section class="sales-filters">
-    <app-total-sales></app-total-sales>
-    <app-filter-sales></app-filter-sales>
+    <app-total-sales [sales]="itemsList" [currentDate]="date" [currentFilter]="filter"></app-total-sales>
+    <app-filter-sales (salesEvent)="updateList($event)" (dateEvent)="currentDate($event)" (filteredDate)="updateFilter($event)"></app-filter-sales>
   </section>
 
   <section class="sales-list">
-    <app-sales-list></app-sales-list>
+    <app-sales-list [sales]="itemsList" [currentFilter]="filter"></app-sales-list>
   </section>
 </main>

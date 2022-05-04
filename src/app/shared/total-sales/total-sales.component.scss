@@ -9,7 +9,7 @@
     width: 100%;
   }
 
-  .total-sales__title {
+  &__title {
     width: 100%;
     position: relative;
     padding: 21px 18px;
@@ -17,14 +17,17 @@
     background: linear-gradient(90deg, var(--darkpurple) 0%, var(--purple) 100%);
     border-radius: 13px 13px 0 0;
     @include flex(row, center, center, 21px);
+    @media(max-width: 640px) {
+      padding: 15px 10px;
+    }
 
-    .total-sales__title-caption {
+    &-caption {
       @include font(#fff, 15px, 17px, 500, center);
     }
 
-    .total-sales__title-info {
+    &-info {
       cursor: help;
-      .total-sales__title-caption {
+      &-span {
         position: absolute;
         left: 0;
         opacity: 0;
@@ -34,20 +37,21 @@
         height: auto;
       }
       &:hover {
-        .total-sales__title-caption {
+        .total-sales__title-info-span {
           padding: 5px;
-          width: 165px;
+          width: 100%;
+          bottom: 0;
           background-color: var(--darkpurple);
           @include keyframes(fade){
             0%{
             opacity: 0;
             }
-           6%, 94%{
+            6%, 94%{
             opacity: 1;
             }
-           100%{
+            100%{
             opacity: 0;
-           }
+            }
           }
           @include animate(fade, 6s, linear, 1);
           @include font(#fff, 10px, 11px, 300, center);
@@ -59,17 +63,17 @@
           }
         }
       }
-      .total-sales__title-info-image {
+      &-image {
         width: 17px;
         height: 17px;
       }
     }
   }
 
-  .total-sales__amount {
+  &__amount {
     padding: 20px 79px;
 
-    .total-sales__amount-price {
+    &-price {
       @include font(var(--purple), 28px, 30px, 700, center);
       background: -webkit-linear-gradient(174deg, var(--darkpurple), var(--purple));
       background-clip: text;
@@ -77,7 +81,7 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .total-sales__amount-date {
+    &-date {
       margin-top: 10px;
       @include font(var(--lightblue), 13px, 15px, 300, center);
     }

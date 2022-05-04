@@ -3,10 +3,19 @@
 .main-header {
   width: 100%;
   height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 9;
   padding: 30px 39px;
   @include flex(row, center, space-between, 0);
   background: rgb(18,34,104);
   background: linear-gradient(90deg, var(--blue) 0%, var(--darkpurple) 100%);
+  @media(max-width: 640px) {
+    padding: 15px 20px;
+  }
 
   .main-header__logo {
     .main-header__logo-image {

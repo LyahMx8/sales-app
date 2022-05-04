@@ -3,14 +3,14 @@
 .filter-sales {
   width: 100%;
 
-  .filter-actions {
+  &__actions {
     @include flex(row, center, center, 0);
     background-color: #fff;
 
-    .filter-actions__item {
+    &-item {
       width: 100%;
       padding: 4px 5px;
-      .filter-actions__item-button {
+      &-button {
         width: 100%;
         text-align: center;
         padding: 10px;
@@ -30,7 +30,7 @@
     }
   }
 
-  .filter-modal {
+  &__modal {
     margin-top: 14px;
     float: right;
     position: relative;
@@ -38,7 +38,7 @@
     @media(max-width:768px) {
       width: 100%;
     }
-    .filter-toggler {
+    &-toggler {
       width: 189px;
       @include flex(row, center, center, 10px);
       padding: 10px;
@@ -48,77 +48,80 @@
         width: 100%;
       }
       @include font(var(--blue), 14px, 16px, 300, center);
-      .filter-toggler__image {
+      &-image {
         width: 19px;
         height: 19px;
       }
     }
 
-    .filter-form {
+    &-form {
       position: absolute;
       width: 300px;
       top: 0;
       right: 0;
-      padding: 15px 20px;
       border-radius: 12px;
       background-color: #fff;
       box-shadow: 7px 3px 7px rgb(0 0 0 / 4%);
       @media(max-width:768px) {
         width: 100%;
       }
-      .filter-form__title {
+      &-header {
         text-align: center;
         margin-bottom: 34px;
-        .filter-form__title-title {
+        &-title {
           @include font(var(--blue), 13px, 15px, 300, center);
         }
-        .filter-form__title-icon {
+        &-icon {
           position: absolute;
           right: 20px;
           top: 13px;
-          .filter-form__title-icon-image {
+          &-image {
             width: 12px;
             height: 12px;
           }
         }
       }
-    }
-
-    .filter-form__inputs {
-      @include flex(column, flex-start, center, 15px);
-      .filter-form__label {
-        cursor: pointer;
-        @include flex(row, center, center, 16px);
-        @include font(var(--blue), 17px, 19px, 400, center);
-        .filter-form__radio {
-          display: none;
-          &:checked ~ .fake-input {
-            background-color: var(--blue)
+      &-fields {
+        @include flex(column, flex-start, center, 15px);
+        &-label {
+          cursor: pointer;
+          @include flex(row, center, center, 16px);
+          @include font(var(--blue), 17px, 19px, 400, center);
+          .hidden-input {
+            display: none;
+            &:checked ~ .fake-input {
+              background-color: var(--blue)
+            }
+          }
+          .fake-input {
+            width: 19px;
+            height: 19px;
+            display: inline-block;
+            border-radius: 3px;
+            border: 1px solid var(--grey);
+            &::before {
+              content: url(../../../assets/images/icons/icon-check.svg);
+            }
           }
         }
-        .fake-input {
-          width: 19px;
-          height: 19px;
-          display: inline-block;
-          border-radius: 3px;
-          border: 1px solid var(--grey);
-          &::before {
-            content: url(../../../assets/images/icons/icon-check.svg);
+      }
 
-          }
+      &-submit {
+        width: 178px;
+        display: block;
+        padding: 15px;
+        margin: 28px auto 0;
+        opacity: 1;
+        background-color: var(--red);
+        border-radius: 23px;
+        cursor: pointer;
+        @include font(#fff, 17px, 19px, 700, center);
+        &[disabled] {
+          opacity: .6;
+          cursor: default;
         }
       }
     }
 
-    .filter-form__submit {
-      width: 178px;
-      display: block;
-      padding: 15px;
-      margin: 28px auto 0;
-      opacity: .6;
-      background-color: var(--red);
-      border-radius: 23px;
-      @include font(#fff, 17px, 19px, 700, center);
-    }
   }
 }

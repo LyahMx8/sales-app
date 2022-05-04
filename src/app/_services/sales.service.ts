@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Sale } from '../_models/sales.model';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class SalesService {
     private http: HttpClient
   ) { }
 
-  salesData() {
+  salesData(): Observable<Sale> {
     return this.http.get<Sale>(`../../assets/data/sales.jsonc`)
   }
 }

@@ -67,6 +67,7 @@ export class FilterSalesComponent implements OnInit {
   filterSales(filter:any, criteria:any) {
     if(filter == 'date') {
       this.timeFilter = this.salesList
+      this.filtersForm.reset()
       switch(criteria) {
         case 'day':
           this.timeFilter = this.timeFilter.filter((sale:any) => new Date(sale.date).getDay() == this.currentDate.getDay())

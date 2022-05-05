@@ -37,6 +37,9 @@ export class FilterSalesComponent implements OnInit {
   public openModal: boolean = false
   public activeFilter: string = 'month'
   public currentDate = new Date('2020-09-10T07:12:43')
+  public salesList: any
+  public timeFilter: any
+  public typeFilter: any
 
   filtersForm = new FormGroup({
     saleFilter: new FormControl('', Validators.required)
@@ -48,41 +51,40 @@ export class FilterSalesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getSales('', '')
+    this.getSales()
     this.dateEvent.emit(this.currentDate)
   }
 
-  getSales(filter: string, criteria: any) {
+  getSales() {
     this.salesService.salesData()
-      .pipe(
-        map((data:any) => {
-          switch(filter) {
-            case 'date':
-              switch(criteria) {
-                case 'day':
-                  return data.filter((sale:any) => new Date(sale.date).getDay() == this.currentDate.getDay())
-                  break;
-                case 'week':
-                  return data.filter((sale:any) => this.getWeek(new Date(sale.date)) == this.getWeek(this.currentDate))
-                  break;
-                case 'month':
-                  return data.filter((sale:any) => new Date(sale.date).getMonth() == this.currentDate.getMonth())
-                  break;
-              }
-              break;
-            case 'type':
-              if(criteria.saleFilter == 'all') {
-                return data
-              } else {
-                return data.filter((sale:any) => sale.paymentMethod == criteria.saleFilter)
-              }
-              break;
-            default:
-              return data
-          }
-        })
-      )
-      .subscribe(data => this.salesEvent.emit(data))
+      .subscribe((data:any) => {
+        this.salesList = data
+        this.salesEvent.emit(this.salesList)
+      })
+
+  }
+
+  filterSales(filter:any, criteria:any) {
+    if(filter == 'date') {
+      this.timeFilter = this.salesList
+      switch(criteria) {
+        case 'day':
+          this.timeFilter = this.timeFilter.filter((sale:any) => new Date(sale.date).getDay() == this.currentDate.getDay())
+          break;
+        case 'week':
+          this.timeFilter = this.timeFilter.filter((sale:any) => this.getWeek(new Date(sale.date)) == this.getWeek(this.currentDate))
+          break;
+        case 'month':
+          this.timeFilter = this.timeFilter.filter((sale:any) => new Date(sale.date).getMonth() == this.currentDate.getMonth())
+          break;
+      }
+      this.salesEvent.emit(this.timeFilter)
+    } else if(filter == 'type') {
+      !this.timeFilter ? this.typeFilter = this.salesList : this.typeFilter = this.timeFilter
+      if(criteria.saleFilter != 'all')
+        this.typeFilter = this.typeFilter.filter((sale:any) => sale.paymentMethod == criteria.saleFilter)
+      this.salesEvent.emit(this.typeFilter)
+    }
   }
 
   getWeek(date:any) {
@@ -93,13 +95,13 @@ export class FilterSalesComponent implements OnInit {
 
   filterByDate(date:string) {
     this.activeFilter = date
-    this.getSales('date', date)
+    this.filterSales('date', date)
   }
 
   filterByType() {
     this.openModal = false
     this.filtersForm.value
-    this.getSales('type', this.filtersForm.value)
+    this.filterSales('type', this.filtersForm.value)
   }
 
 }
